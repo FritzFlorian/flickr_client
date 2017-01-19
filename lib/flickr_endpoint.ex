@@ -32,9 +32,6 @@ defmodule FlickrClient.FlickrEndpoint do
     Keyword.put(options, :query, new_query)
   end
 
-  @doc "Always decode the response body's json.'"
-  def process_response_body(body), do: Poison.decode!(body)
-
   defp api_key do
     Application.get_env(:flickr_client, :flickr_key)
   end
