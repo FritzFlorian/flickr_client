@@ -7,12 +7,12 @@ config :logger,
 
 case Mix.env do
   :test ->
-    cofig :flickr_client,
-      flickr_token: "FLICKR_TOKEN"
+    config :flickr_client,
+      flickr_key: "FLICKR_KEY"
 
   :dev ->
     config :flickr_client,
-      flickr_token: "FLICKR_TOKEN"
+      flickr_key: "FLICKR_KEY"
 
   _ -> true
 end
