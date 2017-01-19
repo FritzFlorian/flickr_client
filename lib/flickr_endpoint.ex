@@ -5,6 +5,16 @@ defmodule FlickrClient.FlickrEndpoint do
   """
   use HTTPotion.Base
 
+  @doc """
+  Used to issue a request to a specific api method.
+
+  Parameters:
+
+  - `method`: The API method identifier, e.g. 'flickr.photos.search'
+  - `query`: A map holding the query parameters for the request
+  """
+  def get_method(method, query \\ %{}), do: get([method: method, query: query])
+
   @doc "Issues a get request to the flickr json rest API."
   def get(options \\ []), do: get("", options)
 
