@@ -1,0 +1,2 @@
+defmodule FlickrClient do
+end
