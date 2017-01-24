@@ -8,11 +8,13 @@ config :logger,
 case Mix.env do
   :test ->
     config :flickr_client,
-      flickr_key: "FLICKR_KEY"
+      flickr_key: "FLICKR_KEY",
+      flickr_endpoint: FlickrMockEndpoint
 
   :dev ->
     config :flickr_client,
-      flickr_key: "FLICKR_KEY"
+      flickr_key: System.get_env("FLICKR_KEY") || "FLICKR_KEY_UNSET",
+      flickr_endpoint: FlickrClient.FlickrHttpEndpoint
 
   _ -> true
 end

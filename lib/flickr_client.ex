@@ -20,13 +20,12 @@ defmodule FlickrClient do
 
   ## Examples
 
-    iex> FlickrClient.search(text: "some search term")
-    %FlickrClient.Entity.PhotoCollection{...}
+    iex> FlickrClient.search(text: "sample search")
+    %FlickrClient.Entity.PhotoCollection{}
 
   """
   def search(options \\ []) do
-    FlickrClient.FlickrEndpoint.get_method("flickr.photos.search", keywordlist_to_map(options))
-    |> Map.get(:body)
+    endpoint.get_method("flickr.photos.search", keywordlist_to_map(options))
     |> decode_to_struct!(%PhotoResponse{photos: %PhotoCollection{photo: [%Photo{}]}})
     |> Map.get(:photos)
   end
@@ -41,5 +40,9 @@ defmodule FlickrClient do
       _ ->
         Poison.decode!(body, as: as_struct)
     end
+  end
+
+  defp endpoint do
+    Application.get_env(:flickr_client, :flickr_endpoint) || FlickrClient.FlickrHttpEndpoint
   end
 end

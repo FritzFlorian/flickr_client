@@ -1,0 +1,23 @@
+{
+  "photos":
+    {
+      "page": 1,
+      "pages": 100,
+      "perpage": 1,
+      "total": "500",
+      "photo": [
+        {
+          "id": "1111",
+          "owner": "2222",
+          "secret": "3333",
+          "server": "4444",
+          "farm": 5555,
+          "title": "Some Title",
+          "ispublic": 1,
+          "isfriend": 0,
+          "isfamily": 0
+        }
+      ]
+    },
+  "stat": "ok"
+}

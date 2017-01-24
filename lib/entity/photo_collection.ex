@@ -5,5 +5,5 @@ defmodule FlickrClient.Entity.PhotoCollection do
   Photos are accessed as `photo`.
   """
   @derive [Poison.Encoder]
-  defstruct [:page, :pages, :perpage, :photo]
+  defstruct [:page, :pages, :perpage, :photo, :total]
 end
