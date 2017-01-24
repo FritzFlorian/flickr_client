@@ -16,6 +16,6 @@ defmodule FlickrClient.Mixfile do
 
   defp deps do
     [{:httpotion, "~> 3.0.0"},
-     {:poison, "~> 3.0"}]
+     {:poison, "~> 2.0"}]
   end
 end

@@ -10,16 +10,28 @@ defmodule FlickrClient do
   require Logger
 
   @doc"""
-  Search for photos using the flickr api.
+  Method:     flickr.photos.search
+  API-Doc:    https://www.flickr.com/services/api/flickr.photos.search.html
 
-  Returns a `FlickrClient.Entity.PhotoCollection` struct.
+  Search for photos using the flickr api.
+  Pass options to search for specific images.
+
+  Returns `FlickrClient.Entity.PhotoCollection`.
+
+  ## Examples
+
+    iex> FlickrClient.search(text: "some search term")
+    %FlickrClient.Entity.PhotoCollection{...}
+
   """
-  def search_photos(text) do
-    FlickrClient.FlickrEndpoint.get_method("flickr.photos.search", %{text: text}).body
+  def search(options \\ []) do
+    FlickrClient.FlickrEndpoint.get_method("flickr.photos.search", keywordlist_to_map(options))
+    |> Map.get(:body)
     |> decode_to_struct!(%PhotoResponse{photos: %PhotoCollection{photo: [%Photo{}]}})
     |> Map.get(:photos)
   end
 
+  defp keywordlist_to_map(options), do: Enum.into(options, %{})
 
   defp decode_to_struct!(body, as_struct) do
     case Poison.decode(body, as: %FailedRequest{}) do
@@ -30,8 +42,4 @@ defmodule FlickrClient do
         Poison.decode!(body, as: as_struct)
     end
   end
-end
-
-defmodule FlickrClient.Error do
-  defexception message: "Flickr API Error!"
 end
